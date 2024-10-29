@@ -1,0 +1,15 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+plotly
+gunicorn
+flask
+dash
+folium
+geopandas
+shapely
+requests
+boto3
+SQLAlchemy
