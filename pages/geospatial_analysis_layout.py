@@ -12,3 +12,21 @@ def geospatial_analysis_layout(df):
         dcc.Graph(figure=fig),
         # Additional visualizations for regional hotspots and clusters
     ])
+
+
+def create_geospatial_analysis_graph(df):
+    fig = px.scatter_geo(df, locations="country", color="region_txt",
+                         hover_name="country_txt", size="count", 
+                         title="Geospatial Distribution of Attacks")
+    
+    # Dark theme settings
+    fig.update_layout(
+        paper_bgcolor="#1e1e2f",
+        plot_bgcolor="#282a36",
+        font=dict(color="#e0e0e0"),
+        title=dict(font=dict(size=24, color="#ff2e63")),
+        geo=dict(
+            bgcolor="#1e1e2f"
+        ),
+    )
+    return fig
