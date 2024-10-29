@@ -1,0 +1,152 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e2f;
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+}
+
+/* Home Page Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { color: #00adb5; }
+    50% { color: #ff2e63; }
+    100% { color: #00adb5; }
+}
+
+h1, h2 {
+    animation: fadeIn 1.5s ease both;
+    text-align: center;
+    color: #ff2e63;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 2.5em;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+h3 {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 20%;  /* Increase or decrease this value if needed */
+    height: 100vh;
+    position: fixed;
+    background-color: #1e1e2f;
+    padding: 20px;
+    box-shadow: 2px 0px 10px rgba(0,0,0,0.5);
+    z-index: 1;  /* Ensure the sidebar is always on top */
+}
+
+
+/* Navigation Tabs */
+.dcc-Tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dcc-Tab {
+    background-color: #282a36;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+/* Hover and Selected Styles for Navigation Tabs */
+.dcc-Tab:hover {
+    background-color: #00adb5;
+    color: #ffffff;
+}
+
+.dcc-Tab--selected {
+    background-color: #ff2e63;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Content Area */
+.content-area {
+    margin-left: 20%;  /* Matches the width of the sidebar */
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+}
+
+
+/* Home Page Styles */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 3em;
+    color: #ff2e63;
+    animation: fadeIn 2s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #00adb5;
+    margin-bottom: 40px;
+}
+
+.team-header, .team-member {
+    color: #00adb5;
+    font-size: 1.2em;
+}
+
+/* Background Image/GIF */
+body::before {
+    content: "";
+    background: url('/assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: -1;
+}
+/* Graph Container */
+.graph-container {
+    background-color: #282a36;  /* Dark background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: #e0e0e0;
+}
+
+
+/* Graph Title and Axis Labels */
+.graph-container .plotly-graph .title,
+.graph-container .plotly-graph .xtitle,
+.graph-container .plotly-graph .ytitle {
+    color: #ffffff;
+}

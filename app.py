@@ -3,14 +3,12 @@ from dash import dcc, html, Input, Output
 import pandas as pd
 
 # Load the cleaned dataset
-# the daataset is compressed using gzip
+df = pd.read_csv("data/cleaned_data.csv", compression='gzip', encoding='utf-8')
 
-df = pd.read_csv("/Users/saitejasriyerramsetti/Desktop/global/data/cleaned_data.csv", compression='gzip', encoding='utf-8')
-
-#server  = app.server
 # Initialize the Dash app
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
-app.title = "Terrorism Data Insights"
+app.title = "Global Terrorism Data Insights"
+
 # Import layout functions from each feature file
 from pages.temporal_analysis_layout import temporal_analysis_layout
 from pages.geospatial_analysis_layout import geospatial_analysis_layout
@@ -18,23 +16,48 @@ from pages.attack_weapon_analysis_layout import attack_weapon_analysis_layout
 from pages.perpetrator_target_analysis_layout import perpetrator_target_analysis_layout
 from pages.success_failure_analysis_layout import success_failure_analysis_layout
 
-# App layout with Tabs for each feature
+# Home page layout
+def home_page_layout():
+    return html.Div([
+        html.H1("Global Terrorism Patterns Unveiled", className="main-title"),
+        html.H2("BDA594 Final Project - Team Cipher Syndicate", className="subtitle"),
+        html.Div([
+            html.P("Team Members:", className="team-header"),
+            html.Div([
+                html.P("Nikith Reddy", className='team-member'),
+                html.P("Sai Tejasri Yerramsetti", className='team-member'),
+                html.P("Rupali Donde", className='team-member'),
+                html.P("Ashish Patel", className='team-member'),
+            ], className="team-list"),
+        ], className="team-section"),
+        html.P("Welcome to the Global Terrorism Data Analysis application. Use the navigation to explore various analyses.",
+               className="welcome-message"),
+    ], className="home-container")
+
+# App layout with Sidebar using dcc.Tabs
 app.layout = html.Div([
-    html.H1("Global Terrorism Data Analysis"),
-    dcc.Tabs(id="tabs", value='tab-1', children=[
-        dcc.Tab(label='Temporal Analysis', value='tab-1'),
-        dcc.Tab(label='Geospatial Analysis', value='tab-2'),
-        dcc.Tab(label='Attack Type & Weapon Analysis', value='tab-3'),
-        dcc.Tab(label='Perpetrator & Target Analysis', value='tab-4'),
-        dcc.Tab(label='Success/Failure Analysis', value='tab-5'),
-    ]),
-    html.Div(id='tabs-content')
+    html.Div([
+        html.H2("Navigation", className="sidebar-header"),
+        dcc.Tabs(id="tabs", value='home', vertical=True, children=[
+            dcc.Tab(label='Home', value='home', className="nav-link"),
+            dcc.Tab(label='Temporal Analysis', value='tab-1', className="nav-link"),
+            dcc.Tab(label='Geospatial Analysis', value='tab-2', className="nav-link"),
+            dcc.Tab(label='Attack Type & Weapon Analysis', value='tab-3', className="nav-link"),
+            dcc.Tab(label='Perpetrator & Target Analysis', value='tab-4', className="nav-link"),
+            dcc.Tab(label='Success/Failure Analysis', value='tab-5', className="nav-link"),
+        ]),
+    ], className="sidebar"),
+
+    # Content Area
+    html.Div(id='tabs-content', className="content-area"),
 ])
 
-# Callbacks to render content based on the selected tab
+# Callback to render content based on the selected tab
 @app.callback(Output('tabs-content', 'children'), [Input('tabs', 'value')])
 def render_content(tab):
-    if tab == 'tab-1':
+    if tab == 'home':
+        return home_page_layout()
+    elif tab == 'tab-1':
         return temporal_analysis_layout(df)
     elif tab == 'tab-2':
         return geospatial_analysis_layout(df)
