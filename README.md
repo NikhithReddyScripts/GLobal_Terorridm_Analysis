@@ -1,1 +1,1 @@
-# GLobal_Terorridm_Analysis
+# GLobal_Terrorism_Analysis
